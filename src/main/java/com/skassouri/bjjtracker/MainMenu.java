@@ -59,8 +59,22 @@ public class MainMenu {
         System.out.println("Enter Start Time of Training Session: ");
         LocalTime startTime = LocalTime.parse(sc.nextLine());
 
-        System.out.println("Enter Duration: ");
-        int duration = Integer.parseInt(sc.nextLine());
+        int duration = 0;
+
+        while (duration <= 0){
+
+            try {
+
+                System.out.println("Enter Duration (Minutes): ");
+                duration = Integer.parseInt(sc.nextLine());
+
+            } catch (NumberFormatException nfe){
+
+                System.out.println("You have entered an invalid input. Please enter a valid number representing duration (in minutes)");
+
+            }
+
+        }
 
         System.out.println("Enter type of Training Session: ");
         String type = sc.nextLine();
@@ -77,13 +91,15 @@ public class MainMenu {
     }
 
     public void viewTrainingSession(){
-        for (TrainingSession sesh: sm.getSessions()){
-            System.out.println(sesh.toString());
-        };
-    }
+        if (sm.getSessions().isEmpty()){
+            System.out.println("No training sessions found.");
 
-    public SessionManager getSessionManager(){
-        return this.sm;
+        }
+        else {
+            for (TrainingSession sesh: sm.getSessions()){
+                System.out.println(sesh.toString());
+            }
+        }
     }
 
     public void exitMainMenu(){
