@@ -7,24 +7,33 @@ import java.util.Scanner;
 public class MainMenu {
     private SessionManager sm;
     private Scanner sc;
+    private boolean active = true;
 
     public MainMenu(){
         sm = new SessionManager();
         sc = new Scanner(System.in);
+    }
 
-        actionPrompt();
+    public void startMenu (){
+
+        while (active){
+            System.out.println("Welcome to your personal gym Tracker !");
+            System.out.println("1. Add Training Session");
+            System.out.println("2. Delete Training Session");
+            System.out.println("3. View Training Session");
+            System.out.println("4. Exit");
+
+            actionPrompt();
+        }
     }
 
     public void actionPrompt() {
-        System.out.println("Welcome to your personal gym Tracker !");
-        System.out.println("1. Add Training Session");
-        System.out.println("2. Delete Training Session");
-        System.out.println("1. View Training Session");
-        System.out.println("What would you like to do (Pick from 1 - 3): ");
 
-        String inputToPrompt = sc.nextLine();
+        System.out.println("What would you like to do (Pick from 1 - 4): ");
 
-        switch (inputToPrompt){
+        String choice = sc.nextLine();
+
+        switch (choice){
             case "1": createTrainingSession();
                 break;
 
@@ -32,6 +41,13 @@ public class MainMenu {
                 break;
 
             case "3": viewTrainingSession();
+                break;
+
+            case "4": exitMainMenu();
+                break;
+
+            default:
+                System.out.println("You have entered an invalid input !");
                 break;
         }
     }
@@ -61,11 +77,18 @@ public class MainMenu {
     }
 
     public void viewTrainingSession(){
-
+        for (TrainingSession sesh: sm.getSessions()){
+            System.out.println(sesh.toString());
+        };
     }
 
     public SessionManager getSessionManager(){
         return this.sm;
+    }
+
+    public void exitMainMenu(){
+        active = false;
+        sc.close();
     }
 
 }

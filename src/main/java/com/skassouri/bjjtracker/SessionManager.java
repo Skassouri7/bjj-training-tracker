@@ -13,9 +13,7 @@ public class SessionManager {
         this.sessions.add(ts);
     }
 
-    public ArrayList<TrainingSession> getSessions(){
+    public ArrayList<TrainingSession> getSessions() {
         return this.sessions;
     }
-
-
 }
