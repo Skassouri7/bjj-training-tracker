@@ -1,15 +1,18 @@
 package com.skassouri.bjjtracker;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class MainMenu {
+
     private SessionManager sm;
     private Scanner sc;
     private boolean active = true;
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yy");
 
     public MainMenu(){
+
         sm = new SessionManager();
         sc = new Scanner(System.in);
     }
@@ -53,8 +56,10 @@ public class MainMenu {
     }
 
     public void createTrainingSession(){
-        System.out.println("Enter Date of Training Session: ");
-        LocalDate date = LocalDate.parse(sc.nextLine());
+
+        System.out.println("Enter Date of Training Session (dd/mm/yy): ");
+
+        LocalDate date = LocalDate.parse(sc.nextLine(), dateFormatter);
 
         System.out.println("Enter Start Time of Training Session: ");
         LocalTime startTime = LocalTime.parse(sc.nextLine());
@@ -87,15 +92,18 @@ public class MainMenu {
     }
 
     public void deleteTrainingSession(){
+
         System.out.println("DELETE");
     }
 
     public void viewTrainingSession(){
-        if (sm.getSessions().isEmpty()){
-            System.out.println("No training sessions found.");
 
+        if (sm.getSessions().isEmpty()){
+
+            System.out.println("No training sessions found.");
         }
         else {
+
             for (TrainingSession sesh: sm.getSessions()){
                 System.out.println(sesh.toString());
             }
@@ -103,6 +111,7 @@ public class MainMenu {
     }
 
     public void exitMainMenu(){
+
         active = false;
         sc.close();
     }
