@@ -2,6 +2,7 @@ package com.skassouri.bjjtracker;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -57,12 +58,35 @@ public class MainMenu {
 
     public void createTrainingSession(){
 
+        LocalDate date = null;
+
         System.out.println("Enter Date of Training Session (dd/mm/yy): ");
 
-        LocalDate date = LocalDate.parse(sc.nextLine(), dateFormatter);
+        while (date == null){
+            try{
 
-        System.out.println("Enter Start Time of Training Session: ");
-        LocalTime startTime = LocalTime.parse(sc.nextLine());
+                date = LocalDate.parse(sc.nextLine(), dateFormatter);
+
+            } catch(DateTimeParseException dte){
+
+                System.out.println("You have entered an invalid date, Please enter the date in the correct format (dd/mm/yy)");
+            }
+        }
+
+        LocalTime startTime= null;
+        System.out.println("Enter Start Time of Training Session (00:00): ");
+
+        while (startTime == null){
+
+            try {
+
+                startTime = LocalTime.parse(sc.nextLine());
+
+            } catch(DateTimeParseException dte) {
+
+                System.out.println("You have entered an incorrect time. Please enter start time in correct format (00:00)");
+            }
+        }
 
         int duration = 0;
 
@@ -81,6 +105,7 @@ public class MainMenu {
 
         }
 
+        //Validate training type / TrainingType Enum ?
         System.out.println("Enter type of Training Session: ");
         String type = sc.nextLine();
 
