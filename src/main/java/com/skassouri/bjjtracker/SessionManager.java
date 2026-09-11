@@ -20,4 +20,8 @@ public class SessionManager {
 
         return this.sessions;
     }
-}
+
+    public TrainingSession getSession(int sessionID){
+
+        return sessions.get(sessionID);
+    }}

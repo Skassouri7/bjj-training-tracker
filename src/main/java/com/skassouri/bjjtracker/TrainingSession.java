@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TrainingSession {
-
+    private int sessionID = 0;
     private LocalDate date;
     private LocalTime startTime;
     private int durationMins;
@@ -18,6 +18,11 @@ public class TrainingSession {
         this.durationMins = duration;
         this.type = type;
         this.note = note;
+    }
+
+
+    public int getSessionID(){
+        return sessionID;
     }
 
     public LocalDate getDate(){
@@ -44,10 +49,15 @@ public class TrainingSession {
        return this.note;
     }
 
+    public String getSummary(){
+        return sessionID + ". " + date + " - " + type;
+    }
+
     @Override
     public String toString() {
 
         return "TrainingSession{" +
+                "SessionID=" + sessionID +
                 "date=" + date +
                 ", startTime=" + startTime +
                 ", duration=" + durationMins +
