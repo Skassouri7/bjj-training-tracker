@@ -117,8 +117,37 @@ public class MainMenu {
                 System.out.println(sesh.getSummary());
             }
 
-            System.out.println("Which training session would you like to delete?");
-            int toDelete = sc.nextInt();
+            System.out.println("Which training session would you like to delete? (Pick session number) - enter 0 if you want to cancel");
+
+            int toDelete = Integer.parseInt(sc.nextLine());
+            String deletedTempSummary = sm.getSession(toDelete).getSummary();
+
+            if (sm.checkSessionExists(toDelete) && toDelete != 0){
+                boolean deletionCompleted = false;
+
+                System.out.println("Are you sure you want to delete this session? y/n");
+
+                while (!deletionCompleted){
+                    String deleteConfirmationInput = sc.nextLine();
+
+                    switch(deleteConfirmationInput){
+                        case "y": {
+                            sm.getSessions().remove(sm.getSession(toDelete));
+                            deletionCompleted = true;
+                            break;
+                        }
+
+                        case "n":
+                            deleteTrainingSession();
+                            break;
+
+                        default:
+                            System.out.println("Please enter a valid input (y/n)");
+                    }
+                }
+
+                System.out.println("Session (" + deletedTempSummary + ") has been deleted !");
+            }
 
 
         }

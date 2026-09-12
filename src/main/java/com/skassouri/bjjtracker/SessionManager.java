@@ -21,7 +21,14 @@ public class SessionManager {
         return this.sessions;
     }
 
-    public TrainingSession getSession(int sessionID){
+    public boolean checkSessionExists(int sessionID){
+        return sessions.get(sessionID) != null;
+    }
 
+    public TrainingSession getSession(int sessionID){
         return sessions.get(sessionID);
-    }}
+    }
+
+}
+
+

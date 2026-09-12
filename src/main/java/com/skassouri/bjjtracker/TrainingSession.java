@@ -12,7 +12,7 @@ public class TrainingSession {
     private String note;
 
     public TrainingSession(LocalDate date, LocalTime startTime, int duration, String type, String note) {
-
+        sessionID++;
         this.date = date;
         this.startTime = startTime;
         this.durationMins = duration;
