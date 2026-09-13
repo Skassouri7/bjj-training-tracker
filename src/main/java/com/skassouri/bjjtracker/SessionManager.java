@@ -16,17 +16,39 @@ public class SessionManager {
         this.sessions.add(ts);
     }
 
+    public void removeSession(TrainingSession ts){
+
+        this.sessions.remove(ts);
+    }
+
+    public void removeSessionByID(int sessionID){
+
+        for (TrainingSession sesh: sessions){
+            if (sesh.getSessionID() == sessionID){
+                sessions.remove(sesh);
+            }
+        };
+    }
+
     public ArrayList<TrainingSession> getSessions() {
 
         return this.sessions;
     }
 
     public boolean checkSessionExists(int sessionID){
-        return sessions.get(sessionID) != null;
+
+        return getSession(sessionID) != null;
     }
 
     public TrainingSession getSession(int sessionID){
-        return sessions.get(sessionID);
+
+        for (TrainingSession sesh: sessions){
+            if (sesh.getSessionID() == sessionID){
+                return sesh;
+            }
+        }
+
+        return null;
     }
 
 }

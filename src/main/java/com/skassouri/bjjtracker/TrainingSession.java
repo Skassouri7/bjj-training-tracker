@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TrainingSession {
+
+    private static int sessionsCount = 0;
     private int sessionID = 0;
     private LocalDate date;
     private LocalTime startTime;
@@ -12,7 +14,8 @@ public class TrainingSession {
     private String note;
 
     public TrainingSession(LocalDate date, LocalTime startTime, int duration, String type, String note) {
-        sessionID++;
+        sessionsCount++;
+        sessionID = sessionsCount;
         this.date = date;
         this.startTime = startTime;
         this.durationMins = duration;

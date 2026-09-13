@@ -109,47 +109,56 @@ public class MainMenu {
 
     public void deleteTrainingSession(){
 
-        if (sm.getSessions().isEmpty()){
-            System.out.println("No training sessions found.");
-        }
-        else {
-            for (TrainingSession sesh: sm.getSessions()){
-                System.out.println(sesh.getSummary());
+        while (true){
+            if (sm.getSessions().isEmpty()) {
+                System.out.println("No training sessions found.");
+                return;
             }
-
-            System.out.println("Which training session would you like to delete? (Pick session number) - enter 0 if you want to cancel");
-
-            int toDelete = Integer.parseInt(sc.nextLine());
-            String deletedTempSummary = sm.getSession(toDelete).getSummary();
-
-            if (sm.checkSessionExists(toDelete) && toDelete != 0){
-                boolean deletionCompleted = false;
-
-                System.out.println("Are you sure you want to delete this session? y/n");
-
-                while (!deletionCompleted){
-                    String deleteConfirmationInput = sc.nextLine();
-
-                    switch(deleteConfirmationInput){
-                        case "y": {
-                            sm.getSessions().remove(sm.getSession(toDelete));
-                            deletionCompleted = true;
-                            break;
-                        }
-
-                        case "n":
-                            deleteTrainingSession();
-                            break;
-
-                        default:
-                            System.out.println("Please enter a valid input (y/n)");
-                    }
+            else {
+                for (TrainingSession sesh : sm.getSessions()) {
+                    System.out.println(sesh.getSummary());
                 }
 
-                System.out.println("Session (" + deletedTempSummary + ") has been deleted !");
+                System.out.println("Which training session would you like to delete? (Pick session number) - enter 0 if you want to cancel");
+                int userChoice = 0;
+
+                try {
+                    userChoice = Integer.parseInt(sc.nextLine());
+
+                    if (sm.checkSessionExists(userChoice) && userChoice != 0) {
+                        boolean confirmationComplete = false;
+
+                        while (!confirmationComplete){
+                            System.out.println("Are you sure you want to delete this session? y/n");
+                            String deleteConfirmationInput = sc.nextLine();
+
+                            switch (deleteConfirmationInput) {
+                                case "y": {
+                                    String deletedTempSummary = sm.getSession(userChoice).getSummary();
+                                    sm.removeSessionByID(userChoice);
+                                    System.out.println("Session (" + deletedTempSummary + ") has been deleted !");
+                                    confirmationComplete = true;
+                                    break;
+                                }
+
+                                case "n":
+                                    confirmationComplete = true;
+                                    break;
+
+                                default:
+                                    System.out.println("Please enter a valid input (y/n)");
+                            }
+                        }
+                    } else if(userChoice == 0){
+                        return;
+                    } else if(!sm.checkSessionExists(userChoice)){
+                        System.out.println("Session doesn't exist");
+                    }
+                } catch (NumberFormatException nfe){
+
+                        System.out.println("Please enter a valid number choice");
+                }
             }
-
-
         }
     }
 
