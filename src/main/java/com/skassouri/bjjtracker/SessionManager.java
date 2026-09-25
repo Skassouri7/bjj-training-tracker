@@ -23,11 +23,15 @@ public class SessionManager {
 
     public void removeSessionByID(int sessionID){
 
+        TrainingSession sessionToDelete = null;
+
         for (TrainingSession sesh: sessions){
             if (sesh.getSessionID() == sessionID){
-                sessions.remove(sesh);
+                sessionToDelete = sesh;
             }
-        };
+        }
+
+        sessions.remove(sessionToDelete);
     }
 
     public ArrayList<TrainingSession> getSessions() {
