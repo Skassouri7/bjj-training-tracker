@@ -115,8 +115,11 @@ public class MainMenu {
                 return;
             }
             else {
+                int displayIndex = 0;
+
                 for (TrainingSession sesh : sm.getSessions()) {
-                    System.out.println(sesh.getSummary());
+                    System.out.println((displayIndex + 1) + ". " + sesh.getSummary());
+                    displayIndex++;
                 }
 
                 System.out.println("Which training session would you like to delete? (Pick session number) - enter 0 if you want to cancel");
@@ -125,7 +128,7 @@ public class MainMenu {
                 try {
                     userChoice = Integer.parseInt(sc.nextLine());
 
-                    if (sm.checkSessionExists(userChoice) && userChoice != 0) {
+                    if (userChoice <= sm.getSessions().size() && userChoice > 0) {
                         boolean confirmationComplete = false;
 
                         while (!confirmationComplete){
@@ -134,8 +137,8 @@ public class MainMenu {
 
                             switch (deleteConfirmationInput) {
                                 case "y": {
-                                    String deletedTempSummary = sm.getSession(userChoice).getSummary();
-                                    sm.removeSessionByID(userChoice);
+                                    String deletedTempSummary = sm.getSessions().get(userChoice - 1).getSummary();
+                                    sm.getSessions().remove(userChoice - 1);
                                     System.out.println("Session (" + deletedTempSummary + ") has been deleted !");
                                     confirmationComplete = true;
                                     break;
@@ -151,7 +154,7 @@ public class MainMenu {
                         }
                     } else if(userChoice == 0){
                         return;
-                    } else if(!sm.checkSessionExists(userChoice)){
+                    } else {
                         System.out.println("Session doesn't exist");
                     }
                 } catch (NumberFormatException nfe){

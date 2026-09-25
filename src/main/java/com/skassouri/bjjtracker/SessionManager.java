@@ -31,7 +31,12 @@ public class SessionManager {
             }
         }
 
-        sessions.remove(sessionToDelete);
+        removeSession(sessionToDelete);
+    }
+
+    public void removeSessionByIndex(int index){
+
+        removeSession(getSessionByIndex(index));
     }
 
     public ArrayList<TrainingSession> getSessions() {
@@ -39,12 +44,17 @@ public class SessionManager {
         return this.sessions;
     }
 
-    public boolean checkSessionExists(int sessionID){
+    public boolean checkSessionExistsByID(int sessionID){
 
-        return getSession(sessionID) != null;
+        return getSessionByID(sessionID) != null;
     }
 
-    public TrainingSession getSession(int sessionID){
+    public boolean checkSessionExistsByIndex(int index){
+
+        return getSessionByIndex(index) != null;
+    }
+
+    public TrainingSession getSessionByID(int sessionID){
 
         for (TrainingSession sesh: sessions){
             if (sesh.getSessionID() == sessionID){
@@ -53,6 +63,10 @@ public class SessionManager {
         }
 
         return null;
+    }
+
+    public TrainingSession getSessionByIndex(int index){
+        return sessions.get(index);
     }
 
 }

@@ -14,6 +14,7 @@ public class TrainingSession {
     private String note;
 
     public TrainingSession(LocalDate date, LocalTime startTime, int duration, String type, String note) {
+
         sessionsCount++;
         sessionID = sessionsCount;
         this.date = date;
@@ -25,6 +26,7 @@ public class TrainingSession {
 
 
     public int getSessionID(){
+
         return sessionID;
     }
 
@@ -53,7 +55,7 @@ public class TrainingSession {
     }
 
     public String getSummary(){
-        return sessionID + ". " + date + " - " + type;
+        return date + " - " + type;
     }
 
     @Override
