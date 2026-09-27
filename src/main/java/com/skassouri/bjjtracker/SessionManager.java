@@ -1,6 +1,7 @@
 package com.skassouri.bjjtracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SessionManager {
 
@@ -39,9 +40,9 @@ public class SessionManager {
         removeSession(getSessionByIndex(index));
     }
 
-    public ArrayList<TrainingSession> getSessions() {
+    public List<TrainingSession> getSessions() {
 
-        return this.sessions;
+        return List.copyOf(sessions);
     }
 
     public boolean checkSessionExistsByID(int sessionID){
@@ -51,7 +52,7 @@ public class SessionManager {
 
     public boolean checkSessionExistsByIndex(int index){
 
-        return getSessionByIndex(index) != null;
+        return index >= 0 && index < sessions.size();
     }
 
     public TrainingSession getSessionByID(int sessionID){
@@ -66,7 +67,12 @@ public class SessionManager {
     }
 
     public TrainingSession getSessionByIndex(int index){
-        return sessions.get(index);
+
+        if (checkSessionExistsByIndex(index)){
+            return sessions.get(index);
+        }
+
+        return null;
     }
 
 }

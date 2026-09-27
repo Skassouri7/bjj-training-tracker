@@ -138,7 +138,7 @@ public class MainMenu {
                             switch (deleteConfirmationInput) {
                                 case "y": {
                                     String deletedTempSummary = sm.getSessions().get(userChoice - 1).getSummary();
-                                    sm.getSessions().remove(userChoice - 1);
+                                    sm.removeSessionByIndex(userChoice - 1);
                                     System.out.println("Session (" + deletedTempSummary + ") has been deleted !");
                                     confirmationComplete = true;
                                     break;
@@ -171,8 +171,11 @@ public class MainMenu {
             System.out.println("No training sessions found.");
         }
         else {
+            int index = 1;
+
             for (TrainingSession sesh: sm.getSessions()){
-                System.out.println(sesh.getSummary());
+                System.out.println(index + ". " + sesh.getSummary());
+                index++;
             }
         }
 
