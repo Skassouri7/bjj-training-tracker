@@ -1,10 +1,9 @@
-package com.skassouri.bjjtracker;
+package com.skassouri.bjjtracker.domain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class TrainingSession {
-
     private static int sessionsCount = 0;
     private int sessionID = 0;
     private LocalDate date;
@@ -51,7 +50,7 @@ public class TrainingSession {
 
     public String getNote(){
 
-       return this.note;
+        return this.note;
     }
 
     public String getSummary(){
@@ -70,4 +69,5 @@ public class TrainingSession {
                 ", note='" + note + '\'' +
                 '}';
     }
+
 }

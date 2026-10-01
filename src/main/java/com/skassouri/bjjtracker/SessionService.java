@@ -1,13 +1,17 @@
 package com.skassouri.bjjtracker;
 
+import com.skassouri.bjjtracker.domain.TrainingSession;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SessionManager {
+@Service
+public class SessionService {
 
     private ArrayList<TrainingSession> sessions;
 
-    public SessionManager(){
+    public SessionService(){
 
         this.sessions = new ArrayList<>();
     }
@@ -74,7 +78,4 @@ public class SessionManager {
 
         return null;
     }
-
 }
-
-
